@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT ventas (salon,venta+) > <!-- Defino el elemento raiz ventas donde puede haber más de una venta -->
+<!ELEMENT salon EMPTY > <!-- El elemento salon guarda la información con el nombre del salón y la edición. -->
+<!ATTLIST salon nombreSalon CDATA #REQUIRED> 
+<!ATTLIST salon edicion CDATA #REQUIRED> 
+<!-- Datos de la venta -->
+<!ELEMENT venta (codVenta,datosCliente,entrega,vehiculos) > 
+<!ELEMENT codVenta (#PCDATA) > <!-- Código de la venta -->
+<!ELEMENT datosCliente (codCliente,direccionCompleta,(clienteParticular|clienteEmpresa)) >
+<!ELEMENT codCliente (#PCDATA)> <!-- Código Cliente -->
+<!ELEMENT direccionCompleta (domicilio,numeroCalle,poblacion,provincia,codPostal) > <!-- Datos de la dirección del cliente. -->
+<!ELEMENT domicilio (#PCDATA) >
+<!ELEMENT numeroCalle (#PCDATA) >
+<!ELEMENT poblacion (#PCDATA) >
+<!ELEMENT provincia (#PCDATA) >
+<!ELEMENT codPostal (#PCDATA) >
+<!-- Defino los elementos para un cliente particular -->
+<!ELEMENT clienteParticular (nombre,apellido1,dni)>
+<!ELEMENT nombre (#PCDATA) >
+<!ELEMENT apellido1 (#PCDATA) >
+<!ELEMENT dni (#PCDATA) >
+<!-- Defino los elementos de para un cliente empresa -->
+<!ELEMENT clienteEmpresa (nombre,cif,urlWeb?)>
+<!ELEMENT cif (#PCDATA) >
+<!ELEMENT urlWeb (#PCDATA) >
+<!-- Datos de la entre debe de ser o salon o domicilio -->
+<!ELEMENT entrega (#PCDATA) >
+<!-- Vehiculos de la venta. -->
+<!ELEMENT vehiculos (vehiculo)+ >
+<!ELEMENT vehiculo ((codVehTur|codVehCom),marca,modelo,year,puertas,potencia,autonomia,precio,formaPago,fechaCompra,valoracion) > <!-- Datos de los vehiculos -->
+<!-- Dependiendo del tipo de vehiculo tendrán un codigo diferente-->
+<!ELEMENT codVehTur (#PCDATA)>
+<!ELEMENT codVehCom (#PCDATA)>
+<!ELEMENT marca (#PCDATA) >
+<!ELEMENT modelo (#PCDATA) >
+<!ELEMENT year (#PCDATA) >
+<!ELEMENT puertas (#PCDATA) >
+<!ELEMENT potencia (#PCDATA) >
+<!ATTLIST potencia unidad CDATA #FIXED "CV" > <!-- Define un atributo para caracterizar la potencia -->
+<!ELEMENT autonomia (#PCDATA) >
+<!ATTLIST autonomia unidad CDATA #FIXED "km"><!-- Define un atributo para caracterizar la autonomia  -->
+<!ELEMENT precio (#PCDATA) >
+<!ATTLIST precio moneda CDATA #FIXED "euros" > <!-- Define un atributo para caracterizar la moneda -->
+<!ELEMENT formaPago (#PCDATA)><!-- Habia pensado añadir un atributo en la forma ATTLIST formaPago tipoPago (Paypal|Efectivo|Transferencia) #REQUIRED pero he decidido al final añadir la forma de pago como un texto del elemento -->
+<!ELEMENT fechaPago (#PCDATA) >
+<!ELEMENT fechaCompra (#PCDATA) >
+<!ELEMENT valoracion (#PCDATA) >
+

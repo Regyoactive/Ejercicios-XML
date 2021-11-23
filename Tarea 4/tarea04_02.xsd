@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="ventas">
+        <xs:annotation>
+            <xs:documentation xml:lang="es-es">
+                <titulo>LMSGI04</titulo>
+                <modulo>LMSGI04 - DAW - Tarea 4.</modulo>
+                <fecha_creacion>2020-03-31</fecha_creacion>
+                <autor>César Andrés Arenas Garcia</autor>
+                <utilidad>Este esquema representa las ventas de automoviles de la empresa PUMM
+                    Technologies en el salón del automovil de Frankfurt tanto a empresas como a particulares</utilidad>
+                <metodologia>Para el desarrollo de esta práctica he usado un diseño de muñeca rusa
+                    y he definido cada elemento y tipo usando definiciones locales. Solo he creado
+                    un atributo global que define el atributo de las unidades para varios elementos. </metodologia>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="salon">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="es-es">
+                            <descripcion>Defino dos atributos que guardan información sobre el
+                                salon, el nombre y la edición siendo los valores por defecto "Salon
+                                de Frankfurt y 68 respectivamente.</descripcion>
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="nombreSalon" use="required" type="xs:string"
+                            fixed="Salón de Frankfurt"/>
+                        <xs:attribute name="edicion" use="required" type="xs:integer" fixed="68"/>
+                    </xs:complexType>
+                </xs:element>
+
+
+                <xs:element maxOccurs="unbounded" name="venta">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="es-es">
+                            <descripcion>Este elemento guarda cada una de las ventas que se van a
+                                realizar Tiene una cardinalidad de minimo 1 y máximo
+                                muchas.</descripcion>
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="codVenta">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="es-es">
+                                        <descripcion>Ha de ser un código numérico de tres
+                                            cifras.</descripcion>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                        <xs:maxInclusive value="999" fixed="true"/>
+                                        <xs:totalDigits value="3" fixed="true"/>
+                                        <xs:pattern value="\d\d\d"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="datosCliente">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="codCliente">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                  <descripcion>Es una composicion del año que ha de
+                                                  ser igual o superior al 2020 un guión y un número
+                                                  de 4 cifras comenzando con el 0001. Un ejemplo
+                                                  seria 2020-0001</descripcion>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:length value="9"/>
+                                                  <xs:pattern value="20[2-9]\d{1}-\d{4}"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="direccionCompleta">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="domicilio" type="xs:string"/>
+                                                  <xs:element name="numeroCalle">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:integer">
+                                                  <xs:minInclusive value="0"/>
+                                                  <xs:maxInclusive value="9999"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="poblacion" type="xs:string"/>
+                                                  <xs:element name="provincia" type="xs:string"/>
+                                                  <xs:element name="codPostal">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:integer">
+                                                  <xs:pattern
+                                                  value="0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}"/>
+                                                  <xs:minInclusive value="01001"/>
+                                                  <xs:maxInclusive value="52999"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:choice>
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="es-es">
+                                                  <descripcion>Los clientes pueden ser de dos tipos
+                                                  por lo que se ha de añadir uno de los dos
+                                                  elementos clienteParticular o
+                                                  clienteEmpresa</descripcion>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:element name="clienteParticular">
+                                                <xs:annotation>
+                                                  <xs:documentation>
+                                                  <descripcion>Datos para un cliente
+                                                  particular.</descripcion>
+                                                  </xs:documentation>
+                                                </xs:annotation>
+                                                <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="nombre" type="xs:string"/>
+                                                  <xs:element name="apellido1" type="xs:string"/>
+                                                  <xs:element name="dni">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:length value="9"/>
+                                                  <xs:pattern value="\d{8}[A-Z]"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="clienteEmpresa">
+                                                <xs:annotation>
+                                                  <xs:documentation>
+                                                  <descripcion>Datos para un cliente que es
+                                                  empresa</descripcion>
+                                                  </xs:documentation>
+                                                </xs:annotation>
+                                                <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="nombre" type="xs:string"/>
+                                                  <xs:element name="cif">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:length value="9"/>
+                                                  <xs:pattern value="[A-W]\d{7}[A-J]"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="urlWeb"
+                                                  type="xs:anyURI"/>
+                                                  </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:choice>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="entrega">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="SALON"/>
+                                        <xs:enumeration value="DOMICILIO"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="vehiculos">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="vehiculo" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:choice>
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                  <descripcion>He de seleccionar entre dos elementos
+                                                  diferentes uno para los coches comerciales y otro
+                                                  para turismo con el fin de poder validar los
+                                                  códigos del vehiculo según el tipo de
+                                                  vehiculo.</descripcion>
+                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:element id="codVeh" name="codVehTur">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:pattern
+                                                  value="TUR-(BER|COU|CRO|SUV|TTR|MON|DES)-\d{3}"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="codVehCom">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:pattern value="COM-(HAT|TOU|PIC)-\d{3}"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  </xs:choice>
+                                                  <xs:element name="marca" type="xs:string"/>
+                                                  <xs:element name="modelo" type="xs:string"/>
+                                                  <xs:element name="year" type="xs:gYear"/>
+                                                  <xs:element name="puertas" default="5">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:positiveInteger">
+                                                  <xs:minInclusive value="3"/>
+                                                  <xs:maxInclusive value="7"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="potencia">
+                                                  <xs:complexType>
+                                                  <xs:simpleContent>
+                                                  <xs:extension base="xs:positiveInteger">
+                                                  <xs:attribute ref="unidad" use="required"/>
+                                                  </xs:extension>
+                                                  </xs:simpleContent>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="autonomia">
+                                                  <xs:complexType>
+                                                  <xs:simpleContent>
+                                                  <xs:extension base="xs:positiveInteger">
+                                                  <xs:attribute ref="unidad" use="required"/>
+                                                  </xs:extension>
+                                                  </xs:simpleContent>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="precio">
+                                                  <xs:complexType>
+                                                  <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                  <xs:attribute fixed="euros" name="moneda"
+                                                  use="required"/>
+                                                  </xs:extension>
+                                                  </xs:simpleContent>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="formaPago">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="Paypal"/>
+                                                  <xs:enumeration value="Efectivo"/>
+                                                  <xs:enumeration value="Transferencia bancaria"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="fechaCompra" type="xs:date"/>
+                                                  <xs:element name="valoracion">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:integer">
+                                                  <xs:pattern value="(1|2|3|4|5)"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+
+        </xs:complexType>
+    </xs:element>
+    <!--atributos globales-->
+    <xs:attribute name="unidad">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="(km|CV)"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+</xs:schema>

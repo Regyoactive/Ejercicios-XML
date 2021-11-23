@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ventas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="tarea04_02.xsd">
+    <salon nombreSalon="Salón de Frankfurt" edicion="68" />
+   
+    <venta> 
+        <codVenta>001</codVenta>
+        <datosCliente>
+            <codCliente>2020-0001</codCliente>
+            <direccionCompleta>
+                <domicilio>Calle Los Caños</domicilio>
+                <numeroCalle>19</numeroCalle>
+                <poblacion>Pulianas</poblacion>
+                <provincia>Granada</provincia>
+                <codPostal>18197</codPostal>
+            </direccionCompleta>
+            <clienteParticular>
+                <nombre>Alumno</nombre>
+                <apellido1>LMSGI</apellido1>
+                <dni>24263896T</dni>
+            </clienteParticular>
+        </datosCliente>
+        <entrega>SALON</entrega>
+        <vehiculos>
+            <vehiculo>
+                <codVehTur>TUR-BER-001</codVehTur>
+                <marca>Seat</marca>
+                <modelo>ibiza</modelo>
+                <year>2019</year>
+                <puertas>5</puertas>
+                <potencia unidad="CV">250</potencia>
+                <autonomia unidad="km">200</autonomia>
+                <precio moneda="euros">25000</precio>
+                <formaPago>Paypal</formaPago>
+                <fechaCompra>2020-03-08</fechaCompra>
+                <valoracion>4</valoracion>
+            </vehiculo>
+            <vehiculo>
+                <codVehTur>TUR-COU-002</codVehTur>
+                <marca>VolksWagen</marca>
+                <modelo>Polo</modelo>
+                <year>2020</year>
+                <puertas>4</puertas>
+                <potencia unidad="CV">110</potencia>
+                <autonomia unidad="km">450</autonomia>
+                <precio moneda="euros">42000</precio>
+                <formaPago>Transferencia bancaria</formaPago>
+                <fechaCompra>2020-02-29</fechaCompra>
+                <valoracion>5</valoracion>
+            </vehiculo>
+        </vehiculos>
+    </venta>
+    <venta> 
+        <codVenta>002</codVenta>
+        <datosCliente>
+            <codCliente>2020-0002</codCliente>
+            <direccionCompleta>
+                <domicilio>Calle España</domicilio>
+                <numeroCalle>1</numeroCalle>
+                <poblacion>Granada</poblacion>
+                <provincia>Granada</provincia>
+                <codPostal>18001</codPostal>
+            </direccionCompleta>
+            <clienteEmpresa>
+                <nombre>Empresas S.l.</nombre>
+                <cif>B1234567A</cif>
+                <urlWeb>https://www.cosa.es</urlWeb>
+            </clienteEmpresa> 
+        </datosCliente>
+        <entrega>DOMICILIO</entrega>
+        <vehiculos>
+            <vehiculo>
+                <codVehCom>COM-TOU-001</codVehCom>
+                <marca>FIAT</marca>
+                <modelo>TIPO</modelo>
+                <year>2020</year>
+                <puertas>7</puertas>
+                <potencia unidad="CV">450</potencia>
+                <autonomia unidad="km">180</autonomia>
+                <precio moneda="euros">75000</precio>
+                <formaPago>Efectivo</formaPago>
+                <fechaCompra>2020-01-17</fechaCompra>
+                <valoracion>3</valoracion>
+            </vehiculo>
+        </vehiculos>
+    </venta>
+</ventas>

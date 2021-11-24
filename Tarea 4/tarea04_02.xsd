@@ -5,8 +5,6 @@
             <xs:documentation xml:lang="es-es">
                 <titulo>LMSGI04</titulo>
                 <modulo>LMSGI04 - DAW - Tarea 4.</modulo>
-                <fecha_creacion>2020-03-31</fecha_creacion>
-                <autor>César Andrés Arenas Garcia</autor>
                 <utilidad>Este esquema representa las ventas de automoviles de la empresa PUMM
                     Technologies en el salón del automovil de Frankfurt tanto a empresas como a particulares</utilidad>
                 <metodologia>Para el desarrollo de esta práctica he usado un diseño de muñeca rusa
